@@ -1,5 +1,6 @@
-# Counter_4bit_up-down
 # Exp-2
+# Counter_4bit_up-down
+
 
 ## Aim:
 
