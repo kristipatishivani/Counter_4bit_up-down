@@ -53,6 +53,24 @@ Functional Simulation:
 	A Blank Document opens up into which the following source code can be typed down.
 
 (Note : File name should be with HDL Extension)
+Verilog code for 4-Bit Up-Down Counter:
+```
+
+`timescale 1ns / 1 ns
+module counter(clk,m,rst,count);
+input clk,m,rst;
+output reg [3:0] count;
+always@(posedge clk or negedge rst) begin
+if (!rst)
+count=0;
+else if(m)
+count=count+1;
+else
+count=count-1;
+end
+endmodule
+```
+
 
 ### Verilog code for 4-Bit Up-Down Counter:
 
@@ -67,8 +85,24 @@ Functional Simulation:
 	Similarly, create your test bench using gedit <filename_tb>.v or <filename_tb>.vhdl to open a new blank document (4bitup_down_count_tb.v).
 
 ### Test-bench code for 4-Bit Up-Down Counter:
-
-*/Test bench Program  for  4-Bit Up-Down Counter
+```
+`timescale 1ns / 1ns
+module counter_test;
+reg clk,rst,m;
+wire [3:0] count;
+initial begin
+clk=0;
+rst=0;#5;
+rst=1; end
+initial begin
+m=1;
+#160 m=0; end
+counter counter1 (clk,m,rst, count);
+always #5 clk=~clk;
+initial begin $monitor("Time=%t rst=%b clk=%b count=%b" , $time,rst,clk,count);
+#320 $finish; end
+endmodule
+```
 
 ### To Launch Simulation tool
 	linux:/> nclaunch -new&            // “-new” option is used for invoking NCVERILOG for the first time for any design
@@ -184,6 +218,10 @@ It contains statements that map logical library names to their physical director
 
 ## Fig 10: Simulation Waveform Window
 ![image](https://github.com/user-attachments/assets/1bc80840-0789-46c2-aa6d-ff95ba7037e7)
+
+Result:
+
+  The functionality of a 4bit_up-down asynchronous reset Counter was successfully verified using a test bench and simulated with the nclaunch tool.
 
 
 
